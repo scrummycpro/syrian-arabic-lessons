@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Fill in the Blank Quiz{% endblock %}
+{% block title %}Fill-in-the-Blank Quiz{% endblock %}
 {% block content %}
-<div class="mt-5">
-    <h1 class="text-center mb-4">Fill in the Blank Quiz</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Fill-in-the-Blank Quiz</h1>
     <form method="POST">
         {% for question in questions %}
         <div class="form-group">
-            <label><strong>{{ question['transliteration'] }}</strong></label>
-            <input type="text" name="{{ question['id'] }}" class="form-control bg-dark text-light" placeholder="Enter the English meaning">
+            <label><strong>Translate: {{ question['transliteration'] }}</strong></label>
+            <input type="text" name="{{ question['id'] }}" class="form-control bg-dark text-light" placeholder="Enter the English meaning" required>
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block mt-3">Submit</button>
     </form>
 </div>
 {% endblock %}

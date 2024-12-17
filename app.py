@@ -143,8 +143,19 @@ def quiz_mc():
 def quiz_fill():
     db = get_db()
     all_phrases = db.execute('SELECT * FROM phrases').fetchall()
-    return render_template('quiz_fill.html', phrases=all_phrases)
 
+    if request.method == 'POST':
+        score = 0
+        total = len(request.form)
+        for phrase_id, user_answer in request.form.items():
+            correct_answer = db.execute('SELECT english FROM phrases WHERE id = ?', (phrase_id,)).fetchone()
+            if correct_answer and user_answer.strip().lower() == correct_answer['english'].strip().lower():
+                score += 1
+        return render_template('results.html', score=score, total=total, quiz_type="Fill-in-the-Blank")
+
+    # Select 5 random phrases for the quiz
+    questions = random.sample(all_phrases, 5)
+    return render_template('quiz_fill.html', questions=questions)
 # Initialize and seed the database
 init_db()
 seed_data()
