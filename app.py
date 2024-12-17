@@ -117,7 +117,26 @@ def alphabet():
 def quiz_mc():
     db = get_db()
     all_phrases = db.execute('SELECT * FROM phrases').fetchall()
-    return render_template('quiz_mc.html', phrases=all_phrases)
+
+    if request.method == 'POST':
+        score = 0
+        for phrase_id, user_answer in request.form.items():
+            correct_answer = db.execute('SELECT transliteration FROM phrases WHERE id = ?', (phrase_id,)).fetchone()
+            if correct_answer and user_answer == correct_answer['transliteration']:
+                score += 1
+        return render_template('results.html', score=score, total=5, quiz_type="Multiple Choice")
+
+    # Prepare questions and options
+    questions = random.sample(all_phrases, 5)
+    options = []
+    for question in questions:
+        wrong_answers = [p['transliteration'] for p in all_phrases if p['id'] != question['id']]
+        options.append(random.sample(wrong_answers, 3) + [question['transliteration']])
+        random.shuffle(options[-1])
+
+    # Pre-zip questions and options before sending to the template
+    zipped_data = zip(questions, options)
+    return render_template('quiz_mc.html', zipped_data=zipped_data)
 
 # Fill-in-the-Blank Quiz
 @app.route('/quiz-fill', methods=['GET', 'POST'])
