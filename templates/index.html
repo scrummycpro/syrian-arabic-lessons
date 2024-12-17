@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Learn Syrian Arabic{% endblock %}
+{% block content %}
+<div class="mt-5">
+    <h1 class="text-center mb-4">Learn Syrian Arabic Phrases</h1>
+    <ul class="list-group">
+        {% for phrase in phrases %}
+        <li class="list-group-item bg-dark text-light">
+            {{ phrase['english'] }} - <strong>{{ phrase['transliteration'] }}</strong>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

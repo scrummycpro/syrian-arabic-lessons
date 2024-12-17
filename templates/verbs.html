@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Common Verbs{% endblock %}
+{% block content %}
+<div class="mt-5">
+    <h1 class="text-center mb-4">Common Syrian Arabic Verbs</h1>
+    <table class="table table-bordered table-dark text-center">
+        <thead>
+            <tr>
+                <th>Verb (Base Form)</th>
+                <th>Transliteration</th>
+                <th>Example Sentence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for verb in verbs %}
+            <tr>
+                <td>{{ verb['base_form'] }}</td>
+                <td>{{ verb['transliteration'] }}</td>
+                <td>{{ verb['example_sentence'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

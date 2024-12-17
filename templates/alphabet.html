@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Arabic Alphabet{% endblock %}
+{% block content %}
+<div class="mt-5">
+    <h1 class="text-center mb-4">Arabic Alphabet - All Forms</h1>
+    <table class="table table-bordered table-dark text-center">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Isolated</th>
+                <th>Initial</th>
+                <th>Medial</th>
+                <th>Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for letter in letters %}
+            <tr>
+                <td>{{ letter.name }}</td>
+                <td>{{ letter.isolated }}</td>
+                <td>{{ letter.initial }}</td>
+                <td>{{ letter.medial }}</td>
+                <td>{{ letter.final }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

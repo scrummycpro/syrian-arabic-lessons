@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+</head>
+<body style="background-color: #2e2e2e; color: #d1d1d1;">
+    <div class="container">
+        <h1 class="text-center">Syrian Arabic Quiz</h1>
+        <form method="POST">
+            {% for question, choices in questions|zip(options) %}
+            <div class="mb-4">
+                <p><strong>{{ question['english'] }}</strong></p>
+                {% for choice in choices %}
+                <div>
+                    <input type="radio" name="{{ question['id'] }}" value="{{ choice }}"> {{ choice }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
